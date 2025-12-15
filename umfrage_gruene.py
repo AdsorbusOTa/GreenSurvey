@@ -353,23 +353,25 @@ def inject_custom_css() -> None:
 inject_custom_css()
 
 # ============================================================
-# TITEL & EINLEITUNG (mit Titelblock)
+# TITEL & EINLEITUNG (mit Logo links + Titelblock rechts)
 # ============================================================
 
-st.markdown(
-    f"""
-    <div class="title-block" style="display:flex; align-items:center; gap:0.9rem;">
-        <img src="data:image/png;base64,{Image.open(ICON_PATH).convert("RGBA").tobytes().hex()}"
-             style="height:42px; width:auto;" />
-        <div>
+col_logo, col_title = st.columns([1, 12], vertical_alignment="center")
+
+with col_logo:
+    if ICON_PATH.exists():
+        st.image(str(ICON_PATH), width=48)  # ggf. 56, wenn Du es größer willst
+
+with col_title:
+    st.markdown(
+        """
+        <div class="title-block" style="margin-bottom: 0;">
             <h1>Anonyme Mitgliederumfrage</h1>
             <h2>Ortsverband – Bündnis 90/Die Grünen</h2>
         </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
+        """,
+        unsafe_allow_html=True
+    )
 
 st.markdown(
     """
@@ -379,7 +381,7 @@ st.markdown(
     - Deine Teilnahme ist <b>anonym</b> und freiwillig<br>
     - Jede Person wählt einen <b>Tier-Avatar (nur Emoji)</b><br>
     - Es werden <b>keine Antworten gespeichert</b>, nur die Avatar-Belegung<br>
-    - Am Ende kannst Du Deine Antworten zur Erstellung eines Stimmungsbildes an den Vortsand senden
+    - Am Ende kannst Du Deine Antworten zur Erstellung eines Stimmungsbildes an den Vorstand senden
     </div>
     """,
     unsafe_allow_html=True

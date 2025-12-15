@@ -371,10 +371,10 @@ st.markdown(
     <div class="survey-card">
     Diese Seite ist ein <b>Entwurf</b>, um die geplante Umfrage zu zeigen:
 
-    - Teilnahme ist <b>anonym</b><br>
+    - Deinwe Teilnahme ist <b>anonym</b> und freiwillig<br>
     - Jede Person wählt einen <b>Tier-Avatar (nur Emoji)</b><br>
     - Es werden <b>keine Antworten gespeichert</b>, nur die Avatar-Belegung<br>
-    - Später sollen Antworten als E-Mail verschickt und ausgewertet werden
+    - Am Ende kannst Du Deiene Antworten zur Erstellung eines Stimmungsbildes an den Vortsand senden
     </div>
     """,
     unsafe_allow_html=True
@@ -588,6 +588,7 @@ st.markdown(
 if st.button("Antworten als Beispiel anzeigen", type="primary"):
     st.json(antworten)
 
+
 st.markdown(
     """
     <div class="footnote">
@@ -622,7 +623,9 @@ if st.button("📨 Ergebnisse jetzt senden", type="primary", disabled=not can_se
             "answers": antworten,
         }
 
-        subject = "Neue Umfrageantwort (anonym)"
+        avatar = st.session_state.get("reserved_avatar") or st.session_state.get("chosen_avatar") or "Unbekannt"
+        subject = f'Neues Umfrageergebnis von "{avatar}"'
+
         body = json.dumps(payload, ensure_ascii=False, indent=2)
 
         send_results_email(subject=subject, body_text=body)

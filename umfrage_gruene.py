@@ -358,23 +358,28 @@ inject_custom_css()
 
 st.markdown(
     f"""
-    <div class="title-block">
-        <h1>🌻 Anonyme Mitgliederumfrage</h1>
-        <h2>Ortsverband – Bündnis 90/Die Grünen</h2>
+    <div class="title-block" style="display:flex; align-items:center; gap:0.9rem;">
+        <img src="data:image/png;base64,{Image.open(ICON_PATH).convert("RGBA").tobytes().hex()}"
+             style="height:42px; width:auto;" />
+        <div>
+            <h1>Anonyme Mitgliederumfrage</h1>
+            <h2>Ortsverband – Bündnis 90/Die Grünen</h2>
+        </div>
     </div>
     """,
     unsafe_allow_html=True
 )
+
 
 st.markdown(
     """
     <div class="survey-card">
     Diese Seite ist ein <b>Entwurf</b>, um die geplante Umfrage zu zeigen:
 
-    - Deinwe Teilnahme ist <b>anonym</b> und freiwillig<br>
+    - Deine Teilnahme ist <b>anonym</b> und freiwillig<br>
     - Jede Person wählt einen <b>Tier-Avatar (nur Emoji)</b><br>
     - Es werden <b>keine Antworten gespeichert</b>, nur die Avatar-Belegung<br>
-    - Am Ende kannst Du Deiene Antworten zur Erstellung eines Stimmungsbildes an den Vortsand senden
+    - Am Ende kannst Du Deine Antworten zur Erstellung eines Stimmungsbildes an den Vortsand senden
     </div>
     """,
     unsafe_allow_html=True
